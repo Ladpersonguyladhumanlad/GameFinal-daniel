@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cuhpnjk3he65t"]
+
+[ext_resource type="Script" uid="uid://ba758lvfy81kw" path="res://Scripts/Items/ui_item.gd" id="1_yp6d8"]
+[ext_resource type="Texture2D" uid="uid://bv5k8vir20wl8" path="res://Images/icon.svg" id="2_h0ume"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlvke"]
+size = Vector2(160, 160)
+
+[node name="UIItem" type="Node2D" unique_id=1940803429]
+z_index = 1
+script = ExtResource("1_yp6d8")
+icon = ExtResource("2_h0ume")
+
+[node name="IconRect" type="TextureRect" parent="." unique_id=346923002]
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 144.0
+offset_bottom = 144.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture = ExtResource("2_h0ume")
+metadata/_edit_use_anchors_ = true
+
+[node name="GrabBox" type="Area2D" parent="." unique_id=1461884026]
+position = Vector2(-48, -48)
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBox" unique_id=328648077]
+position = Vector2(96, 96)
+shape = SubResource("RectangleShape2D_qlvke")
+
+[connection signal="input_event" from="GrabBox" to="." method="_on_grab_box_input_event"]

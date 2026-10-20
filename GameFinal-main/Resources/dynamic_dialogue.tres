@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="DynamicDialogue" format=3 uid="uid://dv20kk8fw8m8m"]
+
+[ext_resource type="Script" uid="uid://djdsu75cg5x7o" path="res://Scripts/dynamic_dialogue.gd" id="1_ul4iv"]
+
+[resource]
+script = ExtResource("1_ul4iv")

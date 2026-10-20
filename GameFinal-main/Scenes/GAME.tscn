@@ -1,0 +1,478 @@
+[gd_scene format=3 uid="uid://dd05y0wm1dq5c"]
+
+[ext_resource type="Script" uid="uid://cifjm6ul5vsja" path="res://Scripts/main.gd" id="1_o6tti"]
+[ext_resource type="Script" uid="uid://bn0ab8ygohotk" path="res://Scripts/UI/game_view.gd" id="2_cdcye"]
+[ext_resource type="PackedScene" uid="uid://dwtaffn41ph25" path="res://Scenes/Players/player.tscn" id="3_ftpvn"]
+[ext_resource type="PackedScene" uid="uid://6ufgekk564fe" path="res://Scenes/interactable_object.tscn" id="4_1his6"]
+[ext_resource type="Script" uid="uid://dbudai5dj0kuv" path="res://Scripts/UI/ui.gd" id="4_mcf5b"]
+[ext_resource type="PackedScene" uid="uid://dxg8o6xsp03u2" path="res://Scenes/dynamic_npc.tscn" id="5_iemie"]
+[ext_resource type="Texture2D" uid="uid://jb0pds3ggt3c" path="res://Images/Game_UI.png" id="5_qlhwe"]
+[ext_resource type="Texture2D" uid="uid://bmgsdbt6phmfs" path="res://Images/UI/Arrow_U.png" id="6_c7dvr"]
+[ext_resource type="Script" uid="uid://7rdecs3qnxpb" path="res://Scripts/basic_dialogue.gd" id="7_8vgjb"]
+[ext_resource type="Script" uid="uid://djdsu75cg5x7o" path="res://Scripts/dynamic_dialogue.gd" id="7_axihb"]
+[ext_resource type="Texture2D" uid="uid://bsi6cjjf4i0an" path="res://Images/UI/Arrow_D.png" id="7_w0aao"]
+[ext_resource type="Texture2D" uid="uid://q71jrm3cj664" path="res://Images/UI/Arrow_L.png" id="8_2onvb"]
+[ext_resource type="Texture2D" uid="uid://4jdkl4r7spn1" path="res://Images/UI/Arrow_R.png" id="9_lgh21"]
+[ext_resource type="PackedScene" uid="uid://didopil8r8a1u" path="res://Scenes/UI/textbox.tscn" id="10_bnka5"]
+[ext_resource type="Script" uid="uid://dgjrwsx0cvy6c" path="res://Scripts/UI/item_slots.gd" id="11_uu6tj"]
+[ext_resource type="PackedScene" uid="uid://cuhpnjk3he65t" path="res://Scenes/UI/ui_item.tscn" id="12_ce8u6"]
+[ext_resource type="MeshLibrary" uid="uid://dursxfjbttwv2" path="res://World/Tilesets/gametiles.tres" id="12_eeru4"]
+[ext_resource type="Texture2D" uid="uid://crx6bmajrw4um" path="res://World/skybox.hdr" id="13_ce8u6"]
+[ext_resource type="Shader" uid="uid://cos2i8yufudmh" path="res://Shaders/GAME.gdshader" id="13_eeru4"]
+[ext_resource type="PackedScene" uid="uid://blwv8biid5lvh" path="res://Scenes/UI/dialogue_option.tscn" id="16_kck8f"]
+[ext_resource type="Script" uid="uid://b0hg2b4oejk1l" path="res://Scenes/dialogue_options.gd" id="17_lbof5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o7pux"]
+shader = ExtResource("13_eeru4")
+shader_parameter/pixel_size = 2
+shader_parameter/screen_size = Vector2(1280, 960)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8yugm"]
+panorama = ExtResource("13_ce8u6")
+energy_multiplier = 10.0
+
+[sub_resource type="Sky" id="Sky_hlsgw"]
+sky_material = SubResource("PanoramaSkyMaterial_8yugm")
+
+[sub_resource type="Environment" id="Environment_o7pux"]
+background_mode = 2
+background_energy_multiplier = 5.0
+sky = SubResource("Sky_hlsgw")
+sky_rotation = Vector3(0, -1.0925761, 0)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 1
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+
+[sub_resource type="Resource" id="Resource_u233j"]
+script = ExtResource("7_8vgjb")
+text = "\"Hi, I'm a dynamic NPC. You should be able to chat with me.\""
+metadata/_custom_type_script = "uid://7rdecs3qnxpb"
+
+[sub_resource type="Resource" id="Resource_q6i7l"]
+script = ExtResource("7_axihb")
+text = "\"You'd better be.\""
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="Resource" id="Resource_nwdc4"]
+script = ExtResource("7_axihb")
+text = "... :("
+text_speed = 0.5
+skippable = false
+cancellable = false
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="Resource" id="Resource_a2lwh"]
+script = ExtResource("7_axihb")
+text = "\"How dare you say that to me.\""
+text_speed = 0.12
+skippable = false
+nested_dialogue_dict = Dictionary[String, ExtResource("7_axihb")]({
+"Boring..": SubResource("Resource_nwdc4"),
+"Sorry.": SubResource("Resource_q6i7l")
+})
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="Resource" id="Resource_8vgjb"]
+script = ExtResource("7_axihb")
+text = "\"I'll be seeing you.\""
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="Resource" id="Resource_imqkb"]
+script = ExtResource("7_axihb")
+text = "\"Yup!\""
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="Resource" id="Resource_lbof5"]
+script = ExtResource("7_axihb")
+text = "\"Hello.\""
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="Resource" id="Resource_r825g"]
+script = ExtResource("7_axihb")
+text = "\"Go away.\""
+text_speed = 0.04
+skippable = false
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(820, 536)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaehf"]
+size = Vector2(304.27682, 378.28906)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_074og"]
+size = Vector2(345.39557, 353.6185)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cegan"]
+size = Vector2(296.0526, 378.28915)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82xsv"]
+size = Vector2(296.05176, 378.28964)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cqfq"]
+size = Vector2(837.5, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iemie"]
+size = Vector2(1281.25, 837.5)
+
+[node name="Main" type="Node3D" unique_id=1613856982]
+script = ExtResource("1_o6tti")
+
+[node name="ObjectReenableTimer" type="Timer" parent="." unique_id=1074740460]
+wait_time = 0.2
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=230621001]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=508633074]
+material = SubResource("ShaderMaterial_o7pux")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="MainAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=384422743]
+
+[node name="World" type="Node" parent="." unique_id=293752869]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=686279668]
+environment = SubResource("Environment_o7pux")
+
+[node name="GridMap" type="GridMap" parent="World" unique_id=1114189523]
+mesh_library = ExtResource("12_eeru4")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+data = {
+"cells": PackedInt32Array(0, 65535, 1441797, 0, 0, 1441798, 65535, 0, 655366, 65535, 65535, 1048581, 0, 65534, 1441796, 65535, 65534, 1048581, 0, 65533, 1441793, 0, 65532, 1441793, 0, 65531, 1441793, 65535, 65533, 1048577, 65535, 65532, 1048577, 65535, 65531, 1048577, 65535, 65530, 1048577, 65535, 65529, 1048577, 65535, 65528, 1048583, 0, 65530, 1441792, 0, 65529, 1441792, 0, 65528, 1441792, 0, 65527, 1441797, 65535, 65527, 1048581, 65535, 65526, 1048581, 0, 65526, 1441797, 0, 65525, 1441797, 65535, 65525, 1048581, 0, 65524, 655369, 65535, 65524, 655369, 1, 65524, 655361, 2, 65524, 655361, 3, 65524, 655361, 4, 65524, 655361, 5, 65524, 655361, 65534, 65524, 655361, 65533, 65524, 655361, 65532, 65524, 655360, 65531, 65524, 655360, 65530, 65524, 655360, 65534, 65523, 0, 65535, 65523, 0, 0, 65523, 0, 1, 65523, 0, 4, 65523, 1, 6, 65523, 4, 5, 65523, 1, 3, 65523, 1, 2, 65523, 0, 65533, 65523, 1, 65532, 65523, 1, 65531, 65523, 1, 65530, 65523, 1, 65529, 65523, 9, 65529, 65524, 655369, 65528, 65524, 1048581, 65528, 65523, 1048581, 65528, 65525, 1048581, 65528, 65526, 1048581, 65528, 65527, 1048581, 65528, 65528, 1048581, 65528, 65529, 1048581, 65528, 65530, 1048581, 65528, 65522, 1048581, 65528, 65521, 1048583, 65528, 65520, 1048577, 65528, 65519, 1048577, 65528, 65518, 1048577, 65528, 65517, 1048581, 65529, 65522, 1441797, 65529, 65521, 1441793, 65529, 65520, 1441793, 65529, 65519, 1441793, 65529, 65518, 1441793, 65529, 65517, 1441797, 65529, 65525, 1441797, 65529, 65526, 1441797, 65529, 65527, 1441797, 65529, 65528, 1441797, 65529, 65529, 1441797, 65529, 65530, 1441797, 65529, 65531, 1441798, 65528, 65531, 655366, 65529, 65516, 6, 65528, 65516, 1048582, 6, 65524, 655365, 7, 65524, 655365, 8, 65524, 655365, 7, 65523, 5, 9, 65524, 1441798, 9, 65523, 1441797, 8, 65523, 1048578, 8, 65522, 1048581, 9, 65522, 1441797, 9, 65521, 1441797, 8, 65521, 1048581, 8, 65520, 1048581, 8, 65519, 1048581, 8, 65518, 1048582, 9, 65520, 1441797, 9, 65519, 1441794, 9, 65518, 5, 10, 65518, 5, 11, 65518, 5, 12, 65518, 6, 10, 65519, 655365, 11, 65519, 655365, 12, 65519, 1441798, 131073, 1, 1048584, 131073, 0, 655368, 131073, 65535, 655368, 131073, 65534, 655368, 131073, 65533, 655368, 131073, 65532, 655368, 131073, 65531, 655368, 131073, 65530, 655368, 131073, 65529, 655368, 131073, 65528, 655368, 131073, 65527, 655368, 131073, 65526, 655368, 131073, 65525, 655368, 131078, 65522, 1441800, 131077, 65522, 1441800, 131076, 65522, 1441800, 131075, 65522, 1441800, 131074, 65522, 1441800, 131073, 65522, 1441800, 131072, 65522, 1441800, 196607, 65522, 1441800, 196606, 65522, 1441800, 196605, 65522, 1441800, 196604, 65522, 1441800, 196603, 65522, 1441800, 196602, 65522, 1441800, 131072, 1, 1048584, 196607, 1, 1048584, 196606, 1, 8, 196606, 0, 8, 196606, 65535, 8, 131082, 65524, 655368, 131082, 65523, 655368, 131082, 65522, 655368, 131082, 65521, 655368, 131082, 65520, 655368, 196606, 65534, 8, 196606, 65533, 8, 196606, 65532, 8, 196606, 65531, 8, 196606, 65530, 8, 196606, 65529, 8, 196606, 65528, 8, 196606, 65527, 8, 196606, 65526, 8, 196606, 65525, 655368, 196605, 65525, 655368, 196604, 65525, 655368, 196603, 65525, 655368, 131074, 65525, 655368, 131075, 65525, 655368, 131076, 65525, 655368, 131077, 65525, 655368, 131078, 65525, 655368, 131079, 65525, 655368, 131080, 65525, 655368, 131081, 65525, 655368, 196599, 65531, 8, 196599, 65530, 8, 196599, 65529, 8, 196599, 65528, 8, 196599, 65527, 8, 196599, 65526, 8, 196599, 65525, 8, 196599, 65524, 8, 196599, 65523, 8, 196599, 65522, 8, 196599, 65521, 8, 196599, 65520, 8, 196599, 65519, 8, 196599, 65518, 8, 196599, 65517, 8, 131079, 65522, 1048584, 131079, 65521, 1048584, 131079, 65520, 1048584, 131079, 65519, 1048584, 131079, 65518, 1048584, 131079, 65517, 1441800, 131080, 65517, 1441800, 131081, 65517, 1441800, 131082, 65517, 1441800, 131083, 65517, 1441800, 131084, 65517, 1441800)
+}
+metadata/_editor_floor_ = Vector3(0, 2, 0)
+
+[node name="Objects" type="Node" parent="World" unique_id=1122419002]
+
+[node name="Interactables" type="Node" parent="World/Objects" unique_id=1397721299]
+
+[node name="InteractableObject" parent="World/Objects/Interactables" unique_id=335276034 instance=ExtResource("4_1his6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -13)
+object_type = "BasicNPC"
+interact_logic = 3
+sub_interact_logic = 2
+locked = true
+use_logic_on_locked = true
+use_sub_logic_on_locked = true
+description_unlocked = "\"Go away.\""
+description_unlocked_text_speed = 0.06
+description_locked = "\"I am an NPC. Hello.\"
+`\"What are you still doing here?\"
+`\"Go away.\""
+description_locked_text_speed = 0.06
+
+[node name="DynamicNPC" parent="World/Objects/Interactables" unique_id=399268440 instance=ExtResource("5_iemie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.7, -11)
+initial_text = SubResource("Resource_u233j")
+dialogue_dict = Dictionary[String, ExtResource("7_axihb")]({
+"Boring.": SubResource("Resource_a2lwh"),
+"Goodbye.": SubResource("Resource_8vgjb"),
+"Nice.": SubResource("Resource_imqkb")
+})
+
+[node name="DynamicNPC2" parent="World/Objects/Interactables" unique_id=118573393 instance=ExtResource("5_iemie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.7, -11)
+initial_text = SubResource("Resource_lbof5")
+dialogue_dict = Dictionary[String, ExtResource("7_axihb")]({
+"Goodbye.": null,
+"Hello.": SubResource("Resource_r825g")
+})
+
+[node name="GameViewContainer" type="SubViewportContainer" parent="." unique_id=1632488538]
+offset_left = 64.0
+offset_top = 68.0
+offset_right = 984.0
+offset_bottom = 758.0
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+stretch = true
+
+[node name="InteractArea" type="Area2D" parent="GameViewContainer" unique_id=1606502438]
+position = Vector2(458, 423)
+
+[node name="InteractShape" type="CollisionShape2D" parent="GameViewContainer/InteractArea" unique_id=616053889]
+z_index = 2
+position = Vector2(0, -63)
+shape = SubResource("RectangleShape2D_7mycd")
+debug_color = Color(0.89411765, 0.32156864, 0, 0.05882353)
+
+[node name="GameView" type="SubViewport" parent="GameViewContainer" unique_id=381316319]
+handle_input_locally = false
+size = Vector2i(920, 690)
+render_target_update_mode = 4
+script = ExtResource("2_cdcye")
+
+[node name="Player" parent="GameViewContainer/GameView" unique_id=2088727370 instance=ExtResource("3_ftpvn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+
+[node name="UI" type="Control" parent="." unique_id=813614950]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_mcf5b")
+
+[node name="UIFrame" type="TextureRect" parent="UI" unique_id=602384861]
+layout_mode = 0
+offset_right = 2000.0
+offset_bottom = 1500.0
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("5_qlhwe")
+
+[node name="Arrows" type="Node2D" parent="UI/UIFrame" unique_id=1125053197]
+
+[node name="Arrow_U" type="TextureRect" parent="UI/UIFrame/Arrows" unique_id=555281581]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1624.9998
+offset_top = 1104.6875
+offset_right = 2624.9998
+offset_bottom = 2104.6875
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("6_c7dvr")
+
+[node name="Arrow_D" type="TextureRect" parent="UI/UIFrame/Arrows" unique_id=1083047234]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1624.9994
+offset_top = 1109.375
+offset_right = 2624.9995
+offset_bottom = 2109.375
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("7_w0aao")
+
+[node name="Arrow_L" type="TextureRect" parent="UI/UIFrame/Arrows" unique_id=793923345]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1621.8744
+offset_top = 1106.25
+offset_right = 2621.8745
+offset_bottom = 2106.25
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("8_2onvb")
+
+[node name="Arrow_R" type="TextureRect" parent="UI/UIFrame/Arrows" unique_id=1741199632]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1629.6869
+offset_top = 1106.25
+offset_right = 2629.687
+offset_bottom = 2106.25
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("9_lgh21")
+
+[node name="ArrowsArea" type="Area2D" parent="UI/UIFrame/Arrows" unique_id=240561282]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/UIFrame/Arrows/ArrowsArea" unique_id=3773620]
+position = Vector2(1815.6235, 1234.375)
+scale = Vector2(0.3800004, 0.3800004)
+shape = SubResource("RectangleShape2D_yaehf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="UI/UIFrame/Arrows/ArrowsArea" unique_id=1935041188]
+position = Vector2(1815.6235, 1376.5625)
+scale = Vector2(0.3800004, 0.3800004)
+shape = SubResource("RectangleShape2D_074og")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="UI/UIFrame/Arrows/ArrowsArea" unique_id=499525542]
+position = Vector2(1699.999, 1234.375)
+scale = Vector2(0.3800004, 0.3800004)
+shape = SubResource("RectangleShape2D_cegan")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="UI/UIFrame/Arrows/ArrowsArea" unique_id=157905733]
+position = Vector2(1931.2493, 1234.3749)
+scale = Vector2(0.38000026, 0.38000026)
+shape = SubResource("RectangleShape2D_82xsv")
+
+[node name="Textbox" parent="UI/UIFrame" unique_id=1588937042 instance=ExtResource("10_bnka5")]
+layout_mode = 0
+offset_left = 418.75
+offset_top = 1168.75
+offset_right = 1243.75
+offset_bottom = 1356.25
+
+[node name="Panel" parent="UI/UIFrame/Textbox" index="0" unique_id=751905711]
+mouse_filter = 2
+
+[node name="RichTextLabel" parent="UI/UIFrame/Textbox/Panel" index="0" unique_id=888855824]
+offset_left = 12.5
+offset_top = 12.5
+offset_right = -12.5
+offset_bottom = -12.0
+mouse_filter = 2
+
+[node name="TextArea" type="Area2D" parent="UI/UIFrame/Textbox" unique_id=1982661593]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/UIFrame/Textbox/TextArea" unique_id=1155890878]
+position = Vector2(412.5, 93.75)
+shape = SubResource("RectangleShape2D_2cqfq")
+debug_color = Color(0.29803923, 0.627451, 0, 0.18431373)
+
+[node name="InteractTextShape" type="CollisionShape2D" parent="UI/UIFrame/Textbox/TextArea" unique_id=1120870768]
+position = Vector2(396.875, -500)
+shape = SubResource("RectangleShape2D_iemie")
+disabled = true
+debug_color = Color(0.2333461, 0.637172, 3.85046e-07, 0.08235294)
+
+[node name="DialogueOptions" type="Control" parent="UI/UIFrame" unique_id=1266935778]
+layout_mode = 1
+anchor_top = 0.90000004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 12.5
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("17_lbof5")
+
+[node name="DialogueOption0" parent="UI/UIFrame/DialogueOptions" unique_id=938932327 instance=ExtResource("16_kck8f")]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -612.5
+offset_top = -131.24997
+offset_right = -400.0
+offset_bottom = -24.99997
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogueOption1" parent="UI/UIFrame/DialogueOptions" unique_id=712368834 instance=ExtResource("16_kck8f")]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -387.5
+offset_top = -131.24997
+offset_right = -175.0
+offset_bottom = -24.99997
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogueOption2" parent="UI/UIFrame/DialogueOptions" unique_id=436829291 instance=ExtResource("16_kck8f")]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -162.5
+offset_top = -131.24997
+offset_right = 50.0
+offset_bottom = -24.99997
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="DialogueOption3" parent="UI/UIFrame/DialogueOptions" unique_id=54555853 instance=ExtResource("16_kck8f")]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 62.5
+offset_top = -131.24997
+offset_right = 275.0
+offset_bottom = -24.99997
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ItemSlots" type="Node" parent="UI" unique_id=1452694953]
+script = ExtResource("11_uu6tj")
+
+[node name="Slot1" type="Node2D" parent="UI/ItemSlots" unique_id=1791855796]
+position = Vector2(1110, 382)
+
+[node name="UIItem" parent="UI/ItemSlots/Slot1" unique_id=1940803429 instance=ExtResource("12_ce8u6")]
+
+[node name="Slot2" type="Node2D" parent="UI/ItemSlots" unique_id=854446806]
+position = Vector2(1215, 382)
+
+[node name="Slot3" type="Node2D" parent="UI/ItemSlots" unique_id=1616599745]
+position = Vector2(1110, 484)
+
+[node name="Slot4" type="Node2D" parent="UI/ItemSlots" unique_id=320729388]
+position = Vector2(1215, 484)
+
+[node name="Slot5" type="Node2D" parent="UI/ItemSlots" unique_id=866389055]
+position = Vector2(1110, 586)
+
+[node name="Slot6" type="Node2D" parent="UI/ItemSlots" unique_id=152336625]
+position = Vector2(1215, 586)
+
+[node name="Slot7" type="Node2D" parent="UI/ItemSlots" unique_id=1085838004]
+position = Vector2(1110, 688)
+
+[node name="Slot8" type="Node2D" parent="UI/ItemSlots" unique_id=1063262253]
+position = Vector2(1215, 688)
+
+[connection signal="timeout" from="ObjectReenableTimer" to="." method="_on_object_reenable_timer_timeout"]
+[connection signal="input_event" from="GameViewContainer/InteractArea" to="." method="_on_interact_area_input_event"]
+[connection signal="input_event" from="UI/UIFrame/Arrows/ArrowsArea" to="." method="_on_arrows_area_input_event"]
+[connection signal="mouse_exited" from="UI/UIFrame/Arrows/ArrowsArea" to="." method="_on_arrows_area_mouse_exited"]
+[connection signal="mouse_shape_exited" from="UI/UIFrame/Arrows/ArrowsArea" to="." method="_on_arrows_area_mouse_shape_exited"]
+[connection signal="timeout" from="UI/UIFrame/Textbox/TextTimer" to="." method="_on_text_timer_timeout"]
+[connection signal="input_event" from="UI/UIFrame/Textbox/TextArea" to="." method="_on_text_area_input_event"]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot1" to="UI/ItemSlots" method="slot_item_added" binds= [0]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot1" to="UI/ItemSlots" method="slot_item_removed" binds= [0]]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot2" to="UI/ItemSlots" method="slot_item_added" binds= [1]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot2" to="UI/ItemSlots" method="slot_item_removed" binds= [1]]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot3" to="UI/ItemSlots" method="slot_item_added" binds= [2]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot3" to="UI/ItemSlots" method="slot_item_removed" binds= [2]]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot4" to="UI/ItemSlots" method="slot_item_added" binds= [3]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot4" to="UI/ItemSlots" method="slot_item_removed" binds= [3]]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot5" to="UI/ItemSlots" method="slot_item_added" binds= [4]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot5" to="UI/ItemSlots" method="slot_item_removed" binds= [4]]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot6" to="UI/ItemSlots" method="slot_item_added" binds= [5]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot6" to="UI/ItemSlots" method="slot_item_removed" binds= [5]]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot7" to="UI/ItemSlots" method="slot_item_added" binds= [6]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot7" to="UI/ItemSlots" method="slot_item_removed" binds= [6]]
+[connection signal="child_entered_tree" from="UI/ItemSlots/Slot8" to="UI/ItemSlots" method="slot_item_added" binds= [7]]
+[connection signal="child_exiting_tree" from="UI/ItemSlots/Slot8" to="UI/ItemSlots" method="slot_item_removed" binds= [7]]
+
+[editable path="UI/UIFrame/Textbox"]

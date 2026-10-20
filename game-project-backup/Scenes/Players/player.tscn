@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dwtaffn41ph25"]
+
+[ext_resource type="Script" uid="uid://dnaxpy5n5jmb3" path="res://Scripts/Players/player.gd" id="1_4flbx"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
+radius = 0.3
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+radius = 0.3
+height = 1.5
+
+[node name="Player" type="CharacterBody3D" unique_id=2088727370]
+motion_mode = 1
+script = ExtResource("1_4flbx")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1218518139]
+mesh = SubResource("CapsuleMesh_sh265")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=294918949]
+shape = SubResource("CapsuleShape3D_4flbx")
+
+[node name="Head" type="Node3D" parent="." unique_id=112785421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=100337147]
+current = true
+far = 400.0
+
+[node name="RayFrontHead" type="RayCast3D" parent="Head" unique_id=1821205332]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.2, 0)
+target_position = Vector3(0, -1.2, 0)
+
+[node name="RayBackHead" type="RayCast3D" parent="Head" unique_id=96966373]
+transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0.2, 0)
+target_position = Vector3(0, -1.2, 0)
+
+[node name="Feet" type="Node3D" parent="." unique_id=1531544233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+
+[node name="RayFrontFeet" type="RayCast3D" parent="Feet" unique_id=1496199863]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.02, 0)
+target_position = Vector3(0, -1.2, 0)
+
+[node name="RayBackFeet" type="RayCast3D" parent="Feet" unique_id=622186453]
+transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, 1, 0, -1, 1.3113416e-07, 0, 0.02, 0)
+target_position = Vector3(0, -1.2, 0)
+
+[node name="Position_Timer" type="Timer" parent="." unique_id=1374964240]
+wait_time = 0.08
+one_shot = true
+
+[connection signal="timeout" from="Position_Timer" to="." method="_on_position_timer_timeout"]

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dxg8o6xsp03u2"]
+
+[ext_resource type="Script" uid="uid://geaaywwafo7c" path="res://Scripts/dynamic_npc.gd" id="1_s0yan"]
+[ext_resource type="Script" uid="uid://djdsu75cg5x7o" path="res://Scripts/dynamic_dialogue.gd" id="2_05rj0"]
+
+[sub_resource type="Resource" id="Resource_xd3d4"]
+script = ExtResource("2_05rj0")
+text = "\"Hello. I am a dynamic NPC.\""
+metadata/_custom_type_script = "uid://djdsu75cg5x7o"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vujv"]
+albedo_color = Color(0.4019999, 1, 0.31, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_05rj0"]
+material = SubResource("StandardMaterial3D_0vujv")
+size = Vector3(0.5, 1.4, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xd3d4"]
+size = Vector3(0.5, 1.4, 0.5)
+
+[node name="DynamicNPC" type="StaticBody3D" unique_id=399268440]
+script = ExtResource("1_s0yan")
+initial_text = SubResource("Resource_xd3d4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=385066082]
+mesh = SubResource("BoxMesh_05rj0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=994772471]
+shape = SubResource("BoxShape3D_xd3d4")

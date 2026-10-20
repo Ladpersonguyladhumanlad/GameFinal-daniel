@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="ItemLogic" format=3 uid="uid://dxsm2k6x6jb8q"]
+
+[ext_resource type="Script" uid="uid://eh2uak8sydkh" path="res://Scripts/Items/item_logic.gd" id="1_b0dqw"]
+
+[resource]
+script = ExtResource("1_b0dqw")

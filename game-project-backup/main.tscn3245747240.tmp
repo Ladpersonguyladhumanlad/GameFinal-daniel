@@ -1,0 +1,556 @@
+[gd_scene format=3 uid="uid://c7gxc36u3gde"]
+
+[ext_resource type="Script" uid="uid://cifjm6ul5vsja" path="res://Scripts/main.gd" id="1_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dwtaffn41ph25" path="res://Scenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cuhpnjk3he65t" path="res://Scenes/ui_element.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bn0ab8ygohotk" path="res://game_view.gd" id="2_7mycd"]
+[ext_resource type="Texture2D" uid="uid://bv7axmq1qrv2p" path="res://Images/UI/ui_frame.png" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://dbudai5dj0kuv" path="res://Scripts/ui.gd" id="4_efxa6"]
+[ext_resource type="Texture2D" uid="uid://bsi6cjjf4i0an" path="res://Images/UI/Arrow_D.png" id="5_5vw27"]
+[ext_resource type="Texture2D" uid="uid://bmgsdbt6phmfs" path="res://Images/UI/Arrow_U.png" id="5_272bh"]
+[ext_resource type="PackedScene" uid="uid://6ufgekk564fe" path="res://Scenes/interactable_object.tscn" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://q71jrm3cj664" path="res://Images/UI/Arrow_L.png" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://4jdkl4r7spn1" path="res://Images/UI/Arrow_R.png" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://didopil8r8a1u" path="res://Scenes/textbox.tscn" id="10_dg77c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(792, 576)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+albedo_color = Color(0.032994017, 0.020515522, 0.12969106, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(0.56276625, 0.2385261, 0.59495056, 1)
+
+[node name="Main" type="Node3D" unique_id=1613856982]
+script = ExtResource("1_h2yge")
+
+[node name="GameViewContainer" type="SubViewportContainer" parent="." unique_id=1632488538]
+offset_right = 1048.0
+offset_bottom = 840.0
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+stretch = true
+
+[node name="InteractArea" type="Area2D" parent="GameViewContainer" unique_id=1606502438]
+position = Vector2(524, 423)
+
+[node name="InteractShape" type="CollisionShape2D" parent="GameViewContainer/InteractArea" unique_id=616053889]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="GameView" type="SubViewport" parent="GameViewContainer" unique_id=381316319]
+handle_input_locally = false
+size = Vector2i(1048, 840)
+render_target_update_mode = 4
+script = ExtResource("2_7mycd")
+
+[node name="Player" parent="GameViewContainer/GameView" unique_id=2088727370 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+camera_fov = 120
+
+[node name="UI" type="Control" parent="." unique_id=813614950]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_efxa6")
+
+[node name="UI_Frame" type="TextureRect" parent="UI" unique_id=602384861]
+layout_mode = 0
+offset_right = 2000.0
+offset_bottom = 1500.0
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("4_7mycd")
+
+[node name="Arrows" type="Node2D" parent="UI/UI_Frame" unique_id=1125053197]
+
+[node name="Arrow_U" type="TextureRect" parent="UI/UI_Frame/Arrows" unique_id=555281581]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1624.9998
+offset_top = 1104.6875
+offset_right = 2624.9998
+offset_bottom = 2104.6875
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("5_272bh")
+
+[node name="Arrow_D" type="TextureRect" parent="UI/UI_Frame/Arrows" unique_id=1083047234]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1624.9994
+offset_top = 1109.375
+offset_right = 2624.9995
+offset_bottom = 2109.375
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("5_5vw27")
+
+[node name="Arrow_L" type="TextureRect" parent="UI/UI_Frame/Arrows" unique_id=793923345]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1621.8744
+offset_top = 1106.25
+offset_right = 2621.8745
+offset_bottom = 2106.25
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("6_kek77")
+
+[node name="Arrow_R" type="TextureRect" parent="UI/UI_Frame/Arrows" unique_id=1741199632]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1629.6869
+offset_top = 1106.25
+offset_right = 2629.687
+offset_bottom = 2106.25
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("8_4c57u")
+
+[node name="Textbox" parent="UI/UI_Frame" unique_id=1588937042 instance=ExtResource("10_dg77c")]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 1175.0
+offset_right = 787.5
+offset_bottom = 1437.5
+
+[node name="RichTextLabel" parent="UI/UI_Frame/Textbox/Panel" parent_id_path=PackedInt32Array(1588937042, 751905711) index="0" unique_id=888855824]
+offset_right = -99.5
+offset_bottom = 0.5
+
+[node name="UIElement" parent="UI" unique_id=1391183867 instance=ExtResource("2_0xm2m")]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -142.0
+offset_right = 69.0
+offset_bottom = 34.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="testGround(unoptomised)" type="Node" parent="." unique_id=797724122]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1378804100]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=2025263660]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=210941354]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=956783813]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=802400431]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1898540264]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=90225605]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=18573024]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1268849259]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=620237269]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1133443989]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1852760193]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=375918087]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=994014693]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1730939888]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1587453798]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=401265471]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1697107091]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=620177747]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=419091678]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1148070436]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=962948184]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=410955118]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=187540584]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1338884113]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1276347183]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=2024980936]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, -1.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1280991989]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, -2.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=262059510]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1734129672]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1960797515]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D32" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=658512436]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=866083986]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=886057971]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1435709728]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D36" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1779641593]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D37" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=2137286025]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D38" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=208446220]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D39" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1849464211]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -4.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D40" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=248747054]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -3.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D41" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1861070683]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D42" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=488051246]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D43" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1163107020]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D44" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=975298516]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D45" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1720337628]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D46" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=467704976]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D47" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=232893659]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D48" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=175314773]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -5.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D49" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=163755356]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D50" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1329886395]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D51" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=354616005]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D52" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=945562426]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D53" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1008075236]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D54" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=2034298082]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D55" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1276428868]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D56" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1730635072]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D57" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1044321819]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D58" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=408381757]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D59" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1745148972]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, -5.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D60" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1174473480]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, -6.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D61" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1777878544]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D62" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1659986033]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CSGBox3D63" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=1524546848]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.5, -0.05, -3.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CSGBox3D64" type="CSGBox3D" parent="testGround(unoptomised)" unique_id=11744051]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -1.5, -0.05, -4.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="InteractableObject" parent="." unique_id=335276034 instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0.5, -3.5)
+description = "This is a long description. I am writing this as a very long description this description is quite long. And this description is long."
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2006630638]
+transform = Transform3D(0.96592593, 0, 0.2588191, -0.066987306, 0.9659258, 0.25, -0.25000006, -0.25881907, 0.9330128, 0, 4, 0)
+
+[connection signal="input_event" from="GameViewContainer/InteractArea" to="." method="_on_interact_area_input_event"]
+
+[editable path="UI/UI_Frame/Textbox"]

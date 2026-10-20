@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://didopil8r8a1u"]
+
+[node name="Textbox" type="MarginContainer" unique_id=1588937042]
+offset_right = 704.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=751905711]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel" unique_id=888855824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = -32.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 30
+scroll_active = false
+visible_characters_behavior = 1
+
+[node name="Label" type="Label" parent="Panel" unique_id=1025657513]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -72.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextTimer" type="Timer" parent="." unique_id=933046251]

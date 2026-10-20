@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://d0iy30p766fs0"]
+
+[ext_resource type="PackedScene" uid="uid://bsd8vvlitolb8" path="res://Scenes/Players/combat_player.tscn" id="1_3dogw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6w285"]
+albedo_color = Color(0.032994017, 0.020515522, 0.12969106, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dogw"]
+albedo_color = Color(0.56276625, 0.2385261, 0.59495056, 1)
+
+[node name="TestScene" type="Node3D" unique_id=588590344]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2102952910]
+transform = Transform3D(0.9659259, -3.212684e-08, 0.25881907, -0.12940952, 0.8660254, 0.4829629, -0.22414392, -0.5, 0.83651626, 0, 4, 0)
+light_color = Color(0.7001018, 0, 0, 1)
+
+[node name="CombatPlayer" parent="." unique_id=1785432638 instance=ExtResource("1_3dogw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Ground" type="Node" parent="." unique_id=1663649097]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ground" unique_id=675676148]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_6w285")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Ground" unique_id=1504213188]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_6w285")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Ground" unique_id=191219731]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, -0.5, -0.05, 0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_3dogw")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Ground" unique_id=217055949]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0.5, -0.05, -0.5)
+calculate_tangents = false
+use_collision = true
+material = SubResource("StandardMaterial3D_3dogw")

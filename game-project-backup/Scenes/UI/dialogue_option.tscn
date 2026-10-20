@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://blwv8biid5lvh"]
+
+[ext_resource type="Script" uid="uid://de0dt7pfk0k6r" path="res://Scripts/UI/dialogue_option.gd" id="1_xtv51"]
+
+[node name="DialogueOption" type="MarginContainer" unique_id=938932327]
+offset_right = 160.0
+offset_bottom = 64.0
+script = ExtResource("1_xtv51")
+
+[node name="Panel" type="Panel" parent="." unique_id=1942406503]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel" unique_id=2042318648]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Goodbye."
+
+[connection signal="button_up" from="Panel/Button" to="." method="_on_button_button_up"]
